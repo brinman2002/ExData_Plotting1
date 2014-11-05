@@ -18,10 +18,38 @@ data <-subset(read.csv("household_power_consumption.txt",
 
 # End of common code
 
-png(filename="plot2.png")
+png(filename="plot4.png")
+
+par(mfrow = c(2,2))
+
+# Graph 1
 
 plot(data$Global_active_power,  main = "",
         ylab="Global Active Power (kilowatts)",xlab="",type="l",xaxt="n")
 axis(1, at=c(1,length(data$Global_active_power)/2,length(data$Global_active_power)),
         labels=c("Thu","Fri","Sat"))
+
+# Graph 2
+plot(data$Voltage,xaxt="n",type="l",xlab="datetime",ylab="Voltage")
+axis(1, at=c(1,length(data$Voltage)/2,length(data$Voltage)),
+        labels=c("Thu","Fri","Sat"))
+
+# Graph 3
+plot(data$Sub_metering_1,  main = "",
+        ylab="Energy sub metering",xlab="",type="S",xaxt="n")
+lines(data$Sub_metering_2, col="red",type="S")
+lines(data$Sub_metering_3, col="blue",type="S")
+
+legend(x="topright",legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),
+        col=c("black","red","blue"),lty=c(1,1,1))
+axis(1, at=c(1,length(data$Global_active_power)/2,length(data$Global_active_power)),
+        labels=c("Thu","Fri","Sat"))
+
+# Graph 4
+
+plot(data$Global_reactive_power,xaxt="n",type="l",xlab="datetime",
+        ylab="Global_reactive_power")
+axis(1, at=c(1,length(data$Global_reactive_power)/2,length(data$Global_reactive_power)),
+        labels=c("Thu","Fri","Sat"))
+
 dev.off()

@@ -12,15 +12,9 @@ if(!file.exists("household_power_consumption.txt")){
    unzip("power_consumption.zip" )
 }
 
-raw_data <-subset(read.csv("household_power_consumption.txt",
+data <-subset(read.csv("household_power_consumption.txt",
         sep = ";",na.strings="?"), 
         Date == "1/2/2007" | Date == "2/2/2007")
-
-dates <- weekdays(as.Date(
-        strptime(paste(raw_data$Date, raw_data$Time), format= "%d/%m/%Y %H:%M:%S"),
-        TRUE)
-)
-data <- cbind(raw_data,data.frame(DoW = dates))
 
 # End of common code
 
@@ -32,7 +26,7 @@ lines(data$Sub_metering_2, col="red",type="S")
 lines(data$Sub_metering_3, col="blue",type="S")
 
 legend(x="topright",legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),
-        col=c("black","red","blue"))
+        col=c("black","red","blue"), lty=c(1,1,1))
 axis(1, at=c(1,length(data$Global_active_power)/2,length(data$Global_active_power)),
         labels=c("Thu","Fri","Sat"))
 dev.off()
