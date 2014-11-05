@@ -22,6 +22,10 @@ png(filename="plot4.png")
 
 par(mfrow = c(2,2))
 
+# Two of these graphs are exactly from plot2.R and plot3.R. Again, I'd like to
+# keep them in one common place, but it wasn't clear from the project if this
+# was allowed so I am duplicating them here.
+
 # Graph 1
 
 plot(data$Global_active_power,  main = "",
